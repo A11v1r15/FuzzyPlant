@@ -8,8 +8,8 @@ class Room {
   Room(String n, float x, float y) {
     position = new PVector(x, y);
     name = n;
-    temperatura = 0;
-    persiana = 0;
+    temperatura = 20;
+    persiana = 25;
   }
 
   public double getTemp() {
