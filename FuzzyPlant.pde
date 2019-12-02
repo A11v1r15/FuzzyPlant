@@ -1,6 +1,12 @@
 Plant violeta;
 Room[] casa = new Room[9];
 PImage bg;
+import org.json.JSONObject;
+
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
+import java.net.URISyntaxException;
 
 void setup() {
   size(800, 600);
