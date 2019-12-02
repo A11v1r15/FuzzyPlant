@@ -17,10 +17,6 @@ void setup() {
   colorMode(HSB);
   try {
     violeta = new Plant("violeta");
-    violeta.setTemperatura(35.0);
-    violeta.setPersiana(50.0);
-    violeta.setUv(2.0);
-    print(violeta.getConforto());
   } 
   catch (IOException e) {
     print(e);
@@ -44,11 +40,11 @@ void draw() {
   image(bg, width / 2, height / 2);
   image(violeta.icon, (width - bg.width)/2 + violeta.getPosition().x, (height - bg.height)/2 + violeta.getPosition().y, 50, 50);
 }
-
+/*
 void keyPressed() {
   violeta.moveTo(casa[int(random(0, 9))].position);
 }
-
+*/
 void decisao() {
   Table confortoLugar = new Table();
   confortoLugar.addColumn("local");

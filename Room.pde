@@ -26,7 +26,7 @@ class Room {
   }
   
   public void setTemp(int temp){
-    this.temp = temp;
+    this.temperatura = temp;
   }
   public void setPosition(PVector vec2){
     this.position = vec2;
