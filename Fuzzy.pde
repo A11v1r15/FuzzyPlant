@@ -34,4 +34,11 @@ class Fuzzy {
     fb.evaluate();
     return fb.getVariable("conforto").defuzzify();
   }
+  
+  double getConforto(double temp, double persiana, double uv){
+    setTemperatura(temp);
+    setPersiana(persiana);
+    setUv(uv);
+    return getConforto();
+  }
 }

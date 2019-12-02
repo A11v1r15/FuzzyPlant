@@ -23,4 +23,17 @@ class Room{
   public String getName(){
     return name;
   }
+  
+  public void setTemp(int temp){
+    this.temp = temp;
+  }
+  public void setPosition(PVector vec2){
+    this.position = vec2;
+  }
+  public void setPersiana(int persiana){
+    this.persiana = persiana;
+  }
+  public void setName(String name){
+    this.name = name;
+  }
 }
