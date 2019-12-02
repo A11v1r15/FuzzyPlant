@@ -8,7 +8,20 @@ class Room {
   Room(String n, float x, float y) {
     position = new PVector(x, y);
     name = n;
-    persiana = random(0, 100);
-    temperatura = random(-10, 50);
+    temperatura = 0;
+    persiana = 0;
+  }
+
+  public double getTemp() {
+    return temperatura;
+  }
+  public PVector getPosition() {
+    return position;
+  }
+  public double getPersiana() {
+    return persiana;
+  }
+  public String getName() {
+    return name;
   }
 }

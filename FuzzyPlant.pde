@@ -1,6 +1,12 @@
 Plant violeta;
 Room[] casa = new Room[9];
 PImage bg;
+import org.json.JSONObject;
+
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
+import java.net.URISyntaxException;
 
 void setup() {
   size(800, 600);
@@ -46,5 +52,57 @@ void draw() {
       }
     }
     violeta.moveTo(casa[best].position);
+  }
+}
+
+void networking() {
+  //vai na fe, funciona
+  try{
+    
+final Socket socket;
+    socket = IO.socket("http://localhost:8080");
+
+      
+      
+    Emitter.Listener onHouseChange = new Emitter.Listener() {
+        @Override
+          public void call(final Object... args) {
+
+          JSONObject data = (JSONObject) args[0];
+          System.out.println(data.toString());
+        }
+      };
+      Emitter.Listener onUVChange = new Emitter.Listener() {
+        @Override
+          public void call(final Object... args) {
+
+          JSONObject data = (JSONObject) args[0];
+          System.out.println(data.toString());
+            
+        }
+      };
+      Emitter.Listener onCommand = new Emitter.Listener() {
+        @Override
+          public void call(final Object... args) {
+
+          JSONObject data = (JSONObject) args[0];
+          System.out.println(data.toString());
+        }
+      };
+      Emitter.Listener onConnect = new Emitter.Listener() {
+          @Override
+            public void call(final Object... args) {    
+            System.out.println("connectado");
+          }
+        };
+    
+     
+      socket.on(Socket.EVENT_CONNECT, onConnect);
+      socket.on("houseChange", onHouseChange);
+      socket.on("uvChange", onUVChange);
+      socket.on("command", onCommand);
+      socket.connect();
+  } catch (URISyntaxException lol){
+    println("PAU");
   }
 }
