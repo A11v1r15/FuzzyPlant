@@ -59,12 +59,13 @@ void decisao() {
     entrada.setInt("local", i);
   }
   confortoLugar.sort("conforto"); //ordena tabela pelo conforto (ascendente)
-  TableRow ultimo = confortoLugar.getRow(confortoLugar.getRowCount() -1); //remove a ultima linha (melhor valor)
+  TableRow ultimo = confortoLugar.getRow(confortoLugar.getRowCount() -1); //primeira entrada tem o melhor valor
   int melhorLugar = ultimo.getInt("local");
   violeta.moveTo(casa[melhorLugar].position);
   for (TableRow row : confortoLugar.rows()) {
     println(casa[row.getInt("local")].getName() + ": " + row.getFloat("conforto"));
   }
+  println("Melhor lugar: " + casa[melhorLugar].getName());
 }
 
 void networking() {
@@ -104,7 +105,7 @@ void networking() {
 
         JSONObject data = (JSONObject) args[0];
         try{
-        uv = data.getInt("uv");
+        uv = data.getInt("iuv");
         } catch(JSONException ex){
           println("JSONException");
         }
