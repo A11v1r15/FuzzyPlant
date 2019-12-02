@@ -33,8 +33,18 @@ void setup() {
 void draw() {
   image(bg, width / 2, height / 2);
   image(violeta.icon, (width - bg.width)/2 + violeta.getPosition().x, (height - bg.height)/2 + violeta.getPosition().y, 50, 50);
-}
-
-void keyPressed(){
-  violeta.moveTo(casa[int(random(0,9))].position);
+  if (frameCount % 60 == 0) {
+    int best = 0;
+    for (int i = 0; i < casa.length; i++) {
+      if (casa[i].conforto < 0) {
+        violeta.setTemperatura(casa[i].temperatura);
+        violeta.setPersiana(casa[i].persiana);
+        casa[i].conforto = violeta.getConforto();
+      }
+      if (casa[i].conforto > casa[best].conforto){
+        best = i;
+      }
+    }
+    violeta.moveTo(casa[best].position);
+  }
 }
