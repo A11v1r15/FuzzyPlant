@@ -38,3 +38,55 @@ void draw() {
 void keyPressed(){
   violeta.moveTo(casa[int(random(0,9))].position);
 }
+
+void networking() {
+  //vai na fe, funciona
+  try{
+    
+final Socket socket;
+    socket = IO.socket("http://localhost:8080");
+
+      
+      
+    Emitter.Listener onHouseChange = new Emitter.Listener() {
+        @Override
+          public void call(final Object... args) {
+
+          JSONObject data = (JSONObject) args[0];
+          System.out.println(data.toString());
+        }
+      };
+      Emitter.Listener onUVChange = new Emitter.Listener() {
+        @Override
+          public void call(final Object... args) {
+
+          JSONObject data = (JSONObject) args[0];
+          System.out.println(data.toString());
+            
+        }
+      };
+      Emitter.Listener onCommand = new Emitter.Listener() {
+        @Override
+          public void call(final Object... args) {
+
+          JSONObject data = (JSONObject) args[0];
+          System.out.println(data.toString());
+        }
+      };
+      Emitter.Listener onConnect = new Emitter.Listener() {
+          @Override
+            public void call(final Object... args) {    
+            System.out.println("connectado");
+          }
+        };
+    
+     
+      socket.on(Socket.EVENT_CONNECT, onConnect);
+      socket.on("houseChange", onHouseChange);
+      socket.on("uvChange", onUVChange);
+      socket.on("command", onCommand);
+      socket.connect();
+  } catch (URISyntaxException lol){
+    println("PAU");
+  }
+}
