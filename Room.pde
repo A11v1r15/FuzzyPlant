@@ -1,26 +1,27 @@
-class Room{
+class Room {
   PVector position;
   String name;
-  int temp;
-  int persiana;
-  
+  double persiana;
+  double temperatura;
+  double conforto = -1;
+
   Room(String n, float x, float y) {
     position = new PVector(x, y);
     name = n;
-    temp = 0;
+    temperatura = 0;
     persiana = 0;
   }
-  
-  public int getTemp(){
-    return temp;
+
+  public double getTemp() {
+    return temperatura;
   }
-  public PVector getPosition(){
+  public PVector getPosition() {
     return position;
   }
-  public int getPersiana(){
+  public double getPersiana() {
     return persiana;
   }
-  public String getName(){
+  public String getName() {
     return name;
   }
   

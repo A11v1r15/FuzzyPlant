@@ -69,7 +69,6 @@ void decisao() {
   for (TableRow row : confortoLugar.rows()) {
     println(casa[row.getInt("local")].getName() + ": " + row.getFloat("conforto"));
   }
-  
 }
 
 void networking() {
