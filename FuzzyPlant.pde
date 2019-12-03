@@ -14,7 +14,8 @@ int uv = 0; //incidencia de raios UV
 void setup() {
   networking();
   size(800, 600);
-  colorMode(HSB);
+  colorMode(HSB, 360, 255, 255);
+  //noStroke();
   plantas = new ArrayList<Plant>();
   try {
     plantas.add(new Plant("violeta", 24, 320));
@@ -32,8 +33,8 @@ void setup() {
   casa[3] = new Room("Quarto 1", 310, 155);
   casa[4] = new Room("Quarto 2", 140, 70);
   casa[5] = new Room("Área de Convivência", 230, 245);
-  casa[6] = new Room("Quintal", 630, 220);
-  casa[7] = new Room("Jardim", 300, 345);
+  casa[6] = new Room("Quintal", 300, 345);
+  casa[7] = new Room("Jardim", 550, 70);
   casa[8] = new Room("Garagem", 580, 310);
   casa[6].waterSpot = true;
   casa[7].waterSpot = true;
@@ -52,7 +53,6 @@ void draw() {
     text(casa[i].getName(), (width - bg.width)/2 + casa[i].position.x - 25, (height - bg.height)/2 + casa[i].position.y + 35);
     text(casa[i].getTemp() + "°C / " + casa[i].getPersiana() + "%", (width - bg.width)/2 + casa[i].position.x - 25, (height - bg.height)/2 + casa[i].position.y + 50);
     text("Umidade: " + casa[i].getUmidade(), (width - bg.width)/2 + casa[i].position.x - 25, (height - bg.height)/2 + casa[i].position.y + 65);
-    
   }
   for (Plant planta : plantas) {
     if (planta.getThirsty() && planta.room.waterSpot) {
@@ -60,6 +60,14 @@ void draw() {
     }
     planta.consumeWater();
     image(planta.icon, (width - bg.width)/2 + planta.getPosition().x, (height - bg.height)/2 + planta.getPosition().y, 50, 50);
+    if (planta.waterLevel < planta.min) {
+      fill(map((float)planta.waterLevel, 0, (float)planta.min, 0, 60), 255, 255);
+    } else if (planta.waterLevel > planta.max) {
+      fill(map((float)planta.waterLevel, (float)planta.max, 1024, 180, 240), 255, 255);
+    } else {
+      fill(map((float)planta.waterLevel, (float)planta.min, (float)planta.max, 60, 180), 255, 255);
+    }
+    arc((width - bg.width)/2 + planta.getPosition().x + 15, (height - bg.height)/2 + planta.getPosition().y + 15, 20, 20, 0, map((float)planta.waterLevel, 0, 1024, 0, TAU), PIE);
   }
   if (frameCount % 60 == 0) {
     decisao();
@@ -67,11 +75,11 @@ void draw() {
 }
 
 void keyPressed() {
- for (Plant planta : plantas) {
- planta.moveTo(casa[int(random(0, 9))]);
- }
- }
- 
+  for (Plant planta : plantas) {
+    planta.moveTo(casa[int(random(0, 9))]);
+  }
+}
+
 void decisao() {
   for (Plant planta : plantas) {
     Table confortoLugar = new Table();
@@ -85,7 +93,7 @@ void decisao() {
         double umidade = casa[i].getUmidade();
         boolean waterSpot = casa[i].waterSpot;
         TableRow entrada = confortoLugar.addRow();
-        entrada.setFloat("conforto", (float)planta.getConforto(temp, persiana, uv, umidade,waterSpot ));
+        entrada.setFloat("conforto", (float)planta.getConforto(temp, persiana, uv, umidade, waterSpot ));
         entrada.setInt("local", i);
       }
     }
