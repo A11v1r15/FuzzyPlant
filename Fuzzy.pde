@@ -31,10 +31,15 @@ class Fuzzy {
     return fb.getVariable("conforto").defuzzify();
   }
   
-  double getConforto(double temp, double persiana, double uv){
+  double getConforto(double temp, double persiana, double uv, double umidade, boolean waterSpot){
     setTemperatura(temp);
     setPersiana(persiana);
     setUv(uv);
+    setUmidade(umidade);
+    if(waterSpot)
+      fb.setVariable("water_spot", 1);
+    else
+      fb.setVariable("water_spot", 0);
     return getConforto();
   }
 }

@@ -81,8 +81,10 @@ void decisao() {
       if (!planta.thirsty || (planta.thirsty && casa[i].waterSpot)) {
         double temp = casa[i].getTemp();
         double persiana = casa[i].getPersiana();
+        double umidade = planta.waterLevel;
+        boolean waterSpot = casa[i].waterSpot;
         TableRow entrada = confortoLugar.addRow();
-        entrada.setFloat("conforto", (float)planta.getConforto(temp, persiana, uv));
+        entrada.setFloat("conforto", (float)planta.getConforto(temp, persiana, uv, umidade,waterSpot ));
         entrada.setInt("local", i);
       }
     }
