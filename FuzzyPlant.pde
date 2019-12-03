@@ -46,10 +46,12 @@ void draw() {
   image(bg, width / 2, height / 2);
   for (int i = 0; i < casa.length; i++) {
     fill(0);
-    rect((width - bg.width)/2 + casa[i].position.x - 30, (height - bg.height)/2 + casa[i].position.y + 20, 90, 35);
+    rect((width - bg.width)/2 + casa[i].position.x - 30, (height - bg.height)/2 + casa[i].position.y + 20, 90, 50);
     fill(255);
     text(casa[i].getName(), (width - bg.width)/2 + casa[i].position.x - 25, (height - bg.height)/2 + casa[i].position.y + 35);
     text(casa[i].getTemp() + "°C / " + casa[i].getPersiana() + "%", (width - bg.width)/2 + casa[i].position.x - 25, (height - bg.height)/2 + casa[i].position.y + 50);
+    text("Umidade: " + casa[i].getUmidade(), (width - bg.width)/2 + casa[i].position.x - 25, (height - bg.height)/2 + casa[i].position.y + 65);
+    
   }
   for (Plant planta : plantas) {
     if (planta.getThirsty() && planta.room.waterSpot) {
@@ -113,10 +115,13 @@ void networking() {
           String local = data.getString("name");
           int temperatura = data.getInt("temperatura");
           int persiana = data.getInt("persiana");
+          int umidade = data.getInt("umidade");
           for (int i = 0; i < casa.length; i++) {
             if (casa[i].getName().equals(local)) {
               casa[i].setTemp(temperatura);
               casa[i].setPersiana(persiana);
+              casa[i].setUmidade(umidade);
+              break;
             }
           }
           decisao();
