@@ -30,7 +30,7 @@ void setup() {
   casa[2] = new Room("Cozinha", 440, 250);
   casa[3] = new Room("Quarto 1", 310, 155);
   casa[4] = new Room("Quarto 2", 140, 70);
-  casa[5] = new Room("Area de convivência", 230, 245);
+  casa[5] = new Room("Área de Convivência", 230, 245);
   casa[6] = new Room("Quintal", 630, 220);
   casa[7] = new Room("Jardim", 550, 70);
   casa[8] = new Room("Garagem", 580, 310);
@@ -85,7 +85,7 @@ void decisao() {
 }
 
 void networking() {
-  //vai na fe, funciona
+  // Vai na fé, funciona
   try {
 
     final Socket socket;
