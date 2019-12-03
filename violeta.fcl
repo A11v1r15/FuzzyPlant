@@ -40,9 +40,9 @@ FUZZIFY temperatura
 END_FUZZIFY
 
 FUZZIFY persiana
-	TERM escuro := (0, 1) (25,0) ;
-	TERM esmaecido := (0,0) (20, 0) (30,1) (55,1) (75, 0);
-	TERM claro := (0,0) (70, 0) (75,1) (100, 1);
+	TERM escuro := (0, 1) (40,0) ;
+	TERM esmaecido := (0,0) (20, 0) (40,1) (60,1) (75, 0);
+	TERM claro := (0,0) (60, 0) (75,1) (100, 1);
 END_FUZZIFY
 
 DEFUZZIFY conforto
@@ -59,12 +59,11 @@ RULEBLOCK rules
 	ACCU : NSUM;			// Use 'max' accumulation method
 
 	RULE 1 : IF temperatura IS frio THEN conforto IS desagradavel;
-	RULE 2 : IF uv IS extremo AND persiana IS claro THEN conforto IS desagradavel;
-	RULE 3 : IF temperatura IS ideal AND persiana IS claro THEN conforto is agradavel;
-	RULE 4 : IF temperatura IS quente AND persiana IS claro THEN conforto is normal;
-	RULE 5 : IF persiana IS escuro THEN conforto IS desagradavel;
+	RULE 2 : IF persiana IS escuro THEN conforto IS desagradavel;
+	RULE 3 : IF uv IS extremo AND persiana IS claro THEN conforto IS desagradavel;
+	RULE 4 : IF temperatura IS ideal THEN conforto IS agradavel;
+	RULE 5 : IF persiana IS claro THEN conforto IS agradavel;
 	RULE 6 : IF persiana IS esmaecido AND uv IS NOT extremo THEN conforto is normal;
-	RULE 7 : IF persiana IS claro AND uv IS extremo THEN conforto IS desagradavel;
 END_RULEBLOCK
 
 END_FUNCTION_BLOCK
