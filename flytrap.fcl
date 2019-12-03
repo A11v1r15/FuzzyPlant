@@ -77,7 +77,7 @@ RULEBLOCK rules
 	RULE 6 : IF persiana IS esmaecido AND uv IS NOT extremo THEN conforto is normal;
 	RULE 7 : IF umidade IS encharcado THEN conforto is agradavel;
 	RULE 8 : IF umidade IS umido THEN conforto is normal;
-	RULE 8 : IF umidade IS seco THEN conforto is desagradavel;
+	RULE 9 : IF umidade IS seco THEN conforto is desagradavel;
 END_RULEBLOCK
 
 END_FUNCTION_BLOCK

@@ -79,7 +79,7 @@ void decisao() {
     confortoLugar.addColumn("conforto");
     //baseado nos valores Fuzzy, decidir qual a melhor sala e se mover para lá.
     for (int i = 0; i < casa.length; i++) {
-      if (!planta.thirsty || (planta.thirsty && casa[i].waterSpot)) {
+      if (!planta.getThirsty() || (planta.thirsty && casa[i].waterSpot)) {
         double temp = casa[i].getTemp();
         double persiana = casa[i].getPersiana();
         double umidade = planta.waterLevel;
