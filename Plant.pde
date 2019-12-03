@@ -1,16 +1,22 @@
 class Plant extends Fuzzy {
   PImage icon;
+  Room room;
   PVector position;
   PVector target;
   String name;
-  double water_level;
+  double waterLevel = 512;
+  boolean thirsty = false;
+  double min;
+  double max;
 
-  Plant(String planta) throws IOException {
+  Plant(String planta, double m, double M) throws IOException {
     super(planta);
     name = planta;
     icon = loadImage(planta+".png");
     position = new PVector(0, 0);
     target = new PVector(0, 0);
+    min = m;
+    max = M;
   }
 
   PVector getPosition() {
@@ -22,7 +28,8 @@ class Plant extends Fuzzy {
     return position;
   }
 
-  void moveTo(PVector t) {
-    target = t;
+  void moveTo(Room r) {
+    room = r;
+    target = r.position;
   }
 }

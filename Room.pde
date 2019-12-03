@@ -4,6 +4,7 @@ class Room {
   double persiana;
   double temperatura;
   double conforto = -1;
+  boolean waterSpot = false;
 
   Room(String n, float x, float y) {
     position = new PVector(x, y);
@@ -24,17 +25,17 @@ class Room {
   public String getName() {
     return name;
   }
-  
-  public void setTemp(int temp){
+
+  public void setTemp(int temp) {
     this.temperatura = temp;
   }
-  public void setPosition(PVector vec2){
+  public void setPosition(PVector vec2) {
     this.position = vec2;
   }
-  public void setPersiana(int persiana){
+  public void setPersiana(int persiana) {
     this.persiana = persiana;
   }
-  public void setName(String name){
+  public void setName(String name) {
     this.name = name;
   }
 }

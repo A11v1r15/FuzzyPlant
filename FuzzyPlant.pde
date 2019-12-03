@@ -17,8 +17,8 @@ void setup() {
   colorMode(HSB);
   plantas = new ArrayList<Plant>();
   try {
-    plantas.add(new Plant("violeta"));
-    plantas.add(new Plant("flytrap"));
+    plantas.add(new Plant("violeta", 24, 300));
+    plantas.add(new Plant("flytrap", 700, 1024));
   } 
   catch (IOException e) {
     print(e);
@@ -36,7 +36,7 @@ void setup() {
   casa[8] = new Room("Garagem", 580, 310);
   for (Plant planta : plantas) {
     planta.position = casa[0].position;
-    planta.moveTo(casa[0].position);
+    planta.moveTo(casa[0]);
   }
 }
 
@@ -50,16 +50,23 @@ void draw() {
     text(casa[i].getTemp() + "°C / " + casa[i].getPersiana() + "%", (width - bg.width)/2 + casa[i].position.x - 25, (height - bg.height)/2 + casa[i].position.y + 50);
   }
   for (Plant planta : plantas) {
+    if (planta.thirsty && planta.room.waterSpot) {
+      planta.waterLevel += 0.01;
+    }
+    planta.waterLevel -= 0.001;
     image(planta.icon, (width - bg.width)/2 + planta.getPosition().x, (height - bg.height)/2 + planta.getPosition().y, 50, 50);
+  }
+  if (frameCount % 60 == 0) {
+    decisao();
   }
 }
 /*
 void keyPressed() {
-  for (Plant planta : plantas) {
-    planta.moveTo(casa[int(random(0, 9))].position);
-  }
-}
-*/
+ for (Plant planta : plantas) {
+ planta.moveTo(casa[int(random(0, 9))].position);
+ }
+ }
+ */
 void decisao() {
   for (Plant planta : plantas) {
     Table confortoLugar = new Table();
@@ -67,16 +74,18 @@ void decisao() {
     confortoLugar.addColumn("conforto");
     //baseado nos valores Fuzzy, decidir qual a melhor sala e se mover para lá.
     for (int i = 0; i < casa.length; i++) {
-      double temp = casa[i].getTemp();
-      double persiana = casa[i].getPersiana();
-      TableRow entrada = confortoLugar.addRow();
-      entrada.setFloat("conforto", (float)planta.getConforto(temp, persiana, uv));
-      entrada.setInt("local", i);
+      if (!planta.thirsty || (planta.thirsty && casa[i].waterSpot)) {
+        double temp = casa[i].getTemp();
+        double persiana = casa[i].getPersiana();
+        TableRow entrada = confortoLugar.addRow();
+        entrada.setFloat("conforto", (float)planta.getConforto(temp, persiana, uv));
+        entrada.setInt("local", i);
+      }
     }
     confortoLugar.sort("conforto"); //ordena tabela pelo conforto (ascendente)
     TableRow ultimo = confortoLugar.getRow(confortoLugar.getRowCount() -1); //primeira entrada tem o melhor valor
     int melhorLugar = ultimo.getInt("local");
-    planta.moveTo(casa[melhorLugar].position);
+    planta.moveTo(casa[melhorLugar]);
     for (TableRow row : confortoLugar.rows()) {
       println(casa[row.getInt("local")].getName() + ": " + row.getFloat("conforto"));
     }
