@@ -45,9 +45,9 @@ FUZZIFY persiana
 END_FUZZIFY
 
 FUZZIFY umidade
-	TERM seco := (0, 1) (75, 0);
-	TERM umido := (50, 0) (80, 1) (160, 1) (200, 0);
-	TERM encharcado := (120, 0) (255, 1); 
+	TERM seco := (0, 1) (300, 0);
+	TERM umido := (200, 0) (320, 1) (640, 1) (800, 0);
+	TERM encharcado := (480, 0) (1023, 1); 
 END_FUZZIFY
 
 DEFUZZIFY conforto
