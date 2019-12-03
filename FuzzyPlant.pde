@@ -58,7 +58,7 @@ void draw() {
     if (planta.getThirsty() && planta.room.waterSpot) {
       planta.water();
     }
-    planta.waterLevel -= 0.001;
+    planta.consumeWater();
     image(planta.icon, (width - bg.width)/2 + planta.getPosition().x, (height - bg.height)/2 + planta.getPosition().y, 50, 50);
   }
   if (frameCount % 60 == 0) {

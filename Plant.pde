@@ -37,9 +37,13 @@ class Plant extends Fuzzy {
     thirsty = waterLevel < min;
     return thirsty;
   }
-  
-  void water(){
-      waterLevel += 0.1;
-      thirsty = waterLevel < max;
+
+  void consumeWater() {
+    waterLevel -= 0.005 / (room.umidade + 1);
+  }
+
+  void water() {
+    waterLevel += 0.1;
+    thirsty = waterLevel < max;
   }
 }
