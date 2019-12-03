@@ -3,6 +3,7 @@ class Plant extends Fuzzy {
   PVector position;
   PVector target;
   String name;
+  double water_level;
 
   Plant(String planta) throws IOException {
     super(planta);

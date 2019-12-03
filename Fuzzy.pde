@@ -26,10 +26,6 @@ class Fuzzy {
     fb.setVariable("umidade", temp);
   }
 
-  void setEnergia(double temp) {
-    fb.setVariable("energia", temp);
-  }
-
   double getConforto() {
     fb.evaluate();
     return fb.getVariable("conforto").defuzzify();
