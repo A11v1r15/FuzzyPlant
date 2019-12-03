@@ -46,8 +46,8 @@ FUZZIFY persiana
 END_FUZZIFY
 
 DEFUZZIFY conforto
-	TERM desagradavel := (0,0) (15,1) (33,0);
-	TERM normal := (33,0) (40,1) (66,0);
+	TERM desagradavel := (0,0) (15,1) (20, 1) (33,0);
+	TERM normal := (33,0) (40,1) (50,1) (66,0);
 	TERM agradavel := (66,0) (75,1) (100,1);
 	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
 	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
@@ -56,14 +56,15 @@ END_DEFUZZIFY
 RULEBLOCK rules
 	AND : MIN;			// Use 'min' for 'and' (also implicit use 'max' for 'or' to fulfill DeMorgan's Law)
 	ACT : MIN;			// Use 'min' activation method
-	ACCU : MAX;			// Use 'max' accumulation method
+	ACCU : NSUM;			// Use 'max' accumulation method
 
-	RULE 1 : IF temperatura IS frio AND persiana IS escuro THEN conforto IS desagradavel;
-	
-	RULE 3 : IF temperatura IS quente AND uv IS extremo THEN conforto IS desagradavel;
-	RULE 4 : IF temperatura IS ideal AND persiana IS claro THEN conforto IS agradavel;
-	RULE 5 : IF temperatura IS ideal AND persiana IS esmaecido THEN conforto IS normal;
-	RULE 6 : IF temperatura IS quente AND uv IS alto THEN conforto IS normal;
+	RULE 1 : IF temperatura IS frio THEN conforto IS desagradavel;
+	RULE 2 : IF uv IS extremo AND persiana IS claro THEN conforto IS desagradavel;
+	RULE 3 : IF temperatura IS ideal AND persiana IS claro THEN conforto is agradavel;
+	RULE 4 : IF temperatura IS quente AND persiana IS claro THEN conforto is normal;
+	RULE 5 : IF persiana IS escuro THEN conforto IS desagradavel;
+	RULE 6 : IF persiana IS esmaecido AND uv IS NOT extremo THEN conforto is normal;
+	RULE 7 : IF persiana IS claro AND uv IS extremo THEN conforto IS desagradavel;
 END_RULEBLOCK
 
 END_FUNCTION_BLOCK
