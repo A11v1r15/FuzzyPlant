@@ -53,8 +53,7 @@ void draw() {
   }
   for (Plant planta : plantas) {
     if (planta.getThirsty() && planta.room.waterSpot) {
-      planta.waterLevel += 0.1;
-      planta.thirsty = planta.waterLevel < planta.max;
+      planta.water();
     }
     planta.waterLevel -= 0.001;
     image(planta.icon, (width - bg.width)/2 + planta.getPosition().x, (height - bg.height)/2 + planta.getPosition().y, 50, 50);
