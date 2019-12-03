@@ -32,4 +32,9 @@ class Plant extends Fuzzy {
     room = r;
     target = r.position;
   }
+
+  boolean getThirsty() {
+    thirsty = waterLevel < min;
+    return thirsty;
+  }
 }

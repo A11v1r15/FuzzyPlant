@@ -34,6 +34,8 @@ void setup() {
   casa[6] = new Room("Quintal", 630, 220);
   casa[7] = new Room("Jardim", 550, 70);
   casa[8] = new Room("Garagem", 580, 310);
+  casa[6].waterSpot = true;
+  casa[7].waterSpot = true;
   for (Plant planta : plantas) {
     planta.position = casa[0].position;
     planta.moveTo(casa[0]);
@@ -50,8 +52,9 @@ void draw() {
     text(casa[i].getTemp() + "°C / " + casa[i].getPersiana() + "%", (width - bg.width)/2 + casa[i].position.x - 25, (height - bg.height)/2 + casa[i].position.y + 50);
   }
   for (Plant planta : plantas) {
-    if (planta.thirsty && planta.room.waterSpot) {
-      planta.waterLevel += 0.01;
+    if (planta.getThirsty() && planta.room.waterSpot) {
+      planta.waterLevel += 0.1;
+      planta.thirsty = planta.waterLevel < planta.max;
     }
     planta.waterLevel -= 0.001;
     image(planta.icon, (width - bg.width)/2 + planta.getPosition().x, (height - bg.height)/2 + planta.getPosition().y, 50, 50);
