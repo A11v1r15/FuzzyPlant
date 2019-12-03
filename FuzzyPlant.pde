@@ -17,8 +17,9 @@ void setup() {
   colorMode(HSB);
   plantas = new ArrayList<Plant>();
   try {
-    plantas.add(new Plant("violeta", 24, 300));
+    plantas.add(new Plant("violeta", 24, 320));
     plantas.add(new Plant("flytrap", 700, 1024));
+    plantas.add(new Plant("medinilla", 320, 700));
   } 
   catch (IOException e) {
     print(e);
@@ -32,7 +33,7 @@ void setup() {
   casa[4] = new Room("Quarto 2", 140, 70);
   casa[5] = new Room("Área de Convivência", 230, 245);
   casa[6] = new Room("Quintal", 630, 220);
-  casa[7] = new Room("Jardim", 550, 70);
+  casa[7] = new Room("Jardim", 300, 345);
   casa[8] = new Room("Garagem", 580, 310);
   casa[6].waterSpot = true;
   casa[7].waterSpot = true;
@@ -67,7 +68,7 @@ void draw() {
 /*
 void keyPressed() {
  for (Plant planta : plantas) {
- planta.moveTo(casa[int(random(0, 9))].position);
+ planta.moveTo(casa[int(random(0, 9))]);
  }
  }
  */
