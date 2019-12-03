@@ -34,8 +34,8 @@ FUZZIFY uv
 END_FUZZIFY
 
 FUZZIFY temperatura
-	TERM frio := (-10, 1) (15, 1) (18, 0);
-	TERM ideal := (15, 0) (23,1) (28,1) (30,0);
+	TERM frio := (-10, 1) (-9.4, 1) (-6.7, 0);
+	TERM ideal := (-9.4, 0) (-6.7,1) (28,1) (30,0);
 	TERM quente := (0, 0) (28, 0) (35, 1) (50, 1);
 END_FUZZIFY
 

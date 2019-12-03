@@ -1,10 +1,12 @@
 class Plant extends Fuzzy {
   PImage icon;
-  private PVector position;
-  private PVector target;
+  PVector position;
+  PVector target;
+  String name;
 
   Plant(String planta) throws IOException {
     super(planta);
+    name = planta;
     icon = loadImage(planta+".png");
     position = new PVector(0, 0);
     target = new PVector(0, 0);

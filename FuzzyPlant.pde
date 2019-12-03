@@ -30,7 +30,7 @@ void setup() {
   casa[2] = new Room("Cozinha", 440, 250);
   casa[3] = new Room("Quarto 1", 310, 155);
   casa[4] = new Room("Quarto 2", 140, 70);
-  casa[5] = new Room("Convivência", 230, 245);
+  casa[5] = new Room("Area de convivência", 230, 245);
   casa[6] = new Room("Quintal", 630, 220);
   casa[7] = new Room("Jardim", 550, 70);
   casa[8] = new Room("Garagem", 580, 310);
@@ -44,7 +44,7 @@ void draw() {
   image(bg, width / 2, height / 2);
   for (int i = 0; i < casa.length; i++) {
     fill(0);
-    rect((width - bg.width)/2 + casa[i].position.x - 25, (height - bg.height)/2 + casa[i].position.y + 25, 75 ,25);
+    rect((width - bg.width)/2 + casa[i].position.x - 30, (height - bg.height)/2 + casa[i].position.y + 20, 90, 35);
     fill(255);
     text(casa[i].getName(), (width - bg.width)/2 + casa[i].position.x - 25, (height - bg.height)/2 + casa[i].position.y + 35);
     text(casa[i].getTemp() + "°C / " + casa[i].getPersiana() + "%", (width - bg.width)/2 + casa[i].position.x - 25, (height - bg.height)/2 + casa[i].position.y + 50);
@@ -53,13 +53,13 @@ void draw() {
     image(planta.icon, (width - bg.width)/2 + planta.getPosition().x, (height - bg.height)/2 + planta.getPosition().y, 50, 50);
   }
 }
-
+/*
 void keyPressed() {
   for (Plant planta : plantas) {
     planta.moveTo(casa[int(random(0, 9))].position);
   }
 }
-
+*/
 void decisao() {
   for (Plant planta : plantas) {
     Table confortoLugar = new Table();
@@ -80,7 +80,7 @@ void decisao() {
     for (TableRow row : confortoLugar.rows()) {
       println(casa[row.getInt("local")].getName() + ": " + row.getFloat("conforto"));
     }
-    println("Melhor lugar: " + casa[melhorLugar].getName());
+    println("Melhor lugar " + planta.name + ": " + casa[melhorLugar].getName());
   }
 }
 
