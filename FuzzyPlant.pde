@@ -87,13 +87,14 @@ void decisao() {
     confortoLugar.addColumn("conforto");
     //baseado nos valores Fuzzy, decidir qual a melhor sala e se mover para lá.
     for (int i = 0; i < casa.length; i++) {
-      if (!planta.getThirsty() || (planta.thirsty && casa[i].waterSpot)) {
+      if (!planta.getThirsty() || (planta.getThirsty() && casa[i].waterSpot)) {
         double temp = casa[i].getTemp();
         double persiana = casa[i].getPersiana();
         double umidade = casa[i].getUmidade();
         boolean waterSpot = casa[i].waterSpot;
         TableRow entrada = confortoLugar.addRow();
-        entrada.setFloat("conforto", (float)planta.getConforto(temp, persiana, uv, umidade, waterSpot ));
+        entrada.setFloat("conforto", (float)planta.getConforto(temp, persiana, uv, umidade, waterSpot )
+          + ((casa[i].getName() == planta.room.getName())? 0.1 : 0)); //Dá preferência a sala que a planta já está
         entrada.setInt("local", i);
       }
     }
