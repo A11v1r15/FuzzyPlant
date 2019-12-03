@@ -65,13 +65,13 @@ void draw() {
     decisao();
   }
 }
-/*
+
 void keyPressed() {
  for (Plant planta : plantas) {
  planta.moveTo(casa[int(random(0, 9))]);
  }
  }
- */
+ 
 void decisao() {
   for (Plant planta : plantas) {
     Table confortoLugar = new Table();
@@ -106,8 +106,6 @@ void networking() {
 
     final Socket socket;
     socket = IO.socket("http://localhost:8080");
-
-
 
     Emitter.Listener onHouseChange = new Emitter.Listener() {
       @Override
