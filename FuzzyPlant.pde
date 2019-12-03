@@ -19,7 +19,7 @@ void setup() {
   plantas = new ArrayList<Plant>();
   try {
     plantas.add(new Plant("violeta", 24, 320));
-    plantas.add(new Plant("flytrap", 700, 1024));
+    plantas.add(new Plant("flytrap", 700, 1023));
     plantas.add(new Plant("medinilla", 320, 700));
   } 
   catch (IOException e) {
@@ -45,6 +45,11 @@ void setup() {
 }
 
 void draw() {
+  for (int i = 0; i < height; i++) {
+    stroke((i + frameCount) % 360, 255, 255);
+    line(0, i, width, i);
+  }
+  noStroke();
   image(bg, width / 2, height / 2);
   for (int i = 0; i < casa.length; i++) {
     fill(0);
@@ -87,7 +92,7 @@ void decisao() {
     confortoLugar.addColumn("conforto");
     //baseado nos valores Fuzzy, decidir qual a melhor sala e se mover para lá.
     for (int i = 0; i < casa.length; i++) {
-      if (!planta.getThirsty() || (planta.getThirsty() && casa[i].waterSpot)) {
+      if (!planta.getThirsty() || (planta.getThirsty() && casa[i].waterSpot)) { //Se a planta estiver "sedenta" ela só escolhe entre as salas com waterSpot
         double temp = casa[i].getTemp();
         double persiana = casa[i].getPersiana();
         double umidade = casa[i].getUmidade();

@@ -4,7 +4,6 @@ class Room {
   double persiana;
   double temperatura;
   double umidade;
-  double conforto = -1;
   boolean waterSpot = false;
 
   Room(String n, float x, float y) {
