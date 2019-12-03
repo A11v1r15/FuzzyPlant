@@ -17,7 +17,6 @@ VAR_INPUT
 	persiana : REAL;
 	umidade : REAL;
 	uv : REAL;
-	water_spot: REAL;
 	
 END_VAR
 
@@ -33,14 +32,9 @@ FUZZIFY uv
 	TERM extremo := (0,0) (10, 0) (11,1) (12,1);
 END_FUZZIFY
 
-FUZZIFY water_spot
-	TERM sim := (0, 0) (0.9,0) (1,1);
-	TERM nao := (0, 1) (0.9, 1) (1, 0);
-END_FUZZIFY
-
 FUZZIFY temperatura
-	TERM frio := (-10, 1) (-9.4, 1) (-6.7, 0);
-	TERM ideal := (-9.4, 0) (-6.7,1) (28,1) (30,0);
+	TERM frio := (-10, 1) (-1.1, 1) (1.7, 0);
+	TERM ideal := (-1.1, 0) (1.7,1) (28,1) (30,0);
 	TERM quente := (0, 0) (28, 0) (35, 1) (50, 1);
 END_FUZZIFY
 
@@ -70,13 +64,13 @@ RULEBLOCK rules
 	ACCU : NSUM;			// Use 'max' accumulation method
 
 	RULE 1 : IF temperatura IS frio THEN conforto IS desagradavel;
-	RULE 2 : IF persiana IS escuro THEN conforto IS desagradavel;
+	RULE 2 : IF persiana IS escuro THEN conforto IS agradavel;
 	RULE 3 : IF uv IS extremo AND persiana IS claro THEN conforto IS desagradavel;
 	RULE 4 : IF temperatura IS ideal THEN conforto IS agradavel;
-	RULE 5 : IF persiana IS claro THEN conforto IS agradavel;
+	RULE 5 : IF persiana IS claro THEN conforto IS desagradavel;
 	RULE 6 : IF persiana IS esmaecido AND uv IS NOT extremo THEN conforto is normal;
-	RULE 7 : IF umidade IS encharcado THEN conforto is agradavel;
-	RULE 8 : IF umidade IS umido THEN conforto is normal;
+	RULE 7 : IF umidade IS encharcado THEN conforto is desagradavel;
+	RULE 8 : IF umidade IS umido THEN conforto is agradavel;
 	RULE 8 : IF umidade IS seco THEN conforto is desagradavel;
 END_RULEBLOCK
 
