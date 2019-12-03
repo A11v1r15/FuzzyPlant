@@ -44,6 +44,12 @@ FUZZIFY persiana
 	TERM claro := (0,0) (60, 0) (75,1) (100, 1);
 END_FUZZIFY
 
+FUZZIFY umidade
+	TERM seco := (0, 1) (300, 0);
+	TERM umido := (200, 0) (320, 1) (640, 1) (800, 0);
+	TERM encharcado := (480, 0) (1023, 1); 
+END_FUZZIFY
+
 DEFUZZIFY conforto
 	TERM desagradavel := (0,0) (15,1) (20, 1) (33,0);
 	TERM normal := (33,0) (40,1) (50,1) (66,0);
