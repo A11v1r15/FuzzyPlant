@@ -17,6 +17,8 @@ VAR_INPUT
 	persiana : REAL;
 	umidade : REAL;
 	uv : REAL;
+	water_spot: REAL;
+	water_level: REAL;
 	
 END_VAR
 
@@ -43,6 +45,12 @@ FUZZIFY temperatura
 	TERM quente := (0, 0) (28, 0) (35, 1) (50, 1);
 END_FUZZIFY
 
+FUZZIFY water_level
+	TERM seco := (0, 1) (300, 0);
+	TERM umido := (200, 0) (320, 1) (640, 1) (800, 0);
+	TERM encharcado := (480, 0) (1023, 1); 
+END_FUZZIFY
+
 FUZZIFY persiana
 	TERM escuro := (0, 1) (40,0) ;
 	TERM esmaecido := (0,0) (20, 0) (40,1) (60,1) (75, 0);
@@ -53,6 +61,11 @@ FUZZIFY umidade
 	TERM seco := (0, 1) (300, 0);
 	TERM umido := (200, 0) (320, 1) (640, 1) (800, 0);
 	TERM encharcado := (480, 0) (1023, 1); 
+END_FUZZIFY
+
+FUZZIFY water_spot
+	TERM sim := (0, 0) (0.9,0) (1,1);
+	TERM nao := (0, 1) (0.9, 1) (1, 0);
 END_FUZZIFY
 
 DEFUZZIFY conforto
